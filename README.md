@@ -23,24 +23,28 @@ This library will only work with CodeIgniter 4. For CodeIgniter 3, you can get i
 
 
 ## Installation
-Upload `Controllers` and `Libraries` to CodeIgniter `app` folder.
+Upload `Controllers`, `Libraries` and `Models` to CodeIgniter `app` folder.
 
 ## Usage
 This module is able to query the IP address information from either BIN database or web service. This section will explain how to use this extension to query from BIN database and web service.
 
-Sample codes are given in this project, under **Controllers** folder. You may run the sample code by using <your_domain>/index.php/ip2location_test.
+Sample codes are given in this project, under **Controllers** folder. After added the following line into the *app\Config\Routes.php* file, you may run the sample code by using <your_domain>/index.php/ip2location_test. 
+```
+$routes->get('ip2location_test', 'IP2Location_test::index');
+```
 
 ### BIN Database
 Use following codes in your application for get geolocation information.
-
+```
     // (optional) Define IP2Location database path. By default, the IP2LOCATION_DATABASE is pointed to *app/Libraries/IP2Location/IP2LOCATION-DB.BIN* if you choose not to change the original settings.
     define('IP2LOCATION_DATABASE', '/path/to/ip2location/database');
 
     $ipl = new IP2Location_lib();
     $countryCode = $ipl->getCountryCode('8.8.8.8');
+```
 
 Below are the methods supported for BIN data file lookup.
-
+```
     $countryCode = $ipl->getCountryCode($ip);
     $countryName = $ipl->getCountryName($ip);
     $regionName = $ipl->getRegionName($ip);
@@ -63,10 +67,11 @@ Below are the methods supported for BIN data file lookup.
     $usageType = $ipl->getUsageType($ip);
     $addressType = $ipl->getAddressType($ip);
     $category = $ipl->getCategory($ip);
+```
 
 ### Web Service
 Use following codes in your application for get geolocation information.
-
+```
     // (required) Define IP2Location API key.
     define('IP2LOCATION_API_KEY', 'your_api_key');
 
@@ -84,14 +89,34 @@ Use following codes in your application for get geolocation information.
 
     $ipl = new IP2Location_lib();
     print_r ($ipl->getWebService('8.8.8.8'));
+```
 
 ### MySQL Query
 Use following codes in your application for get geolocation information.
-
+```
     define('IP2LOCATION_DATABASE_TABLE', 'ip2location_table_name');
 
     $db = model('IP2Location_model', false);
     print_r ($db->lookup('8.8.8.8'));
+```
+
+### IPTools
+Use following codes in your application for get IPTools class information.
+```
+    $ipl = new IP2Location_lib();
+    var_dump($ipl->isIpv4('8.8.8.8'));echo '<br>';
+    var_dump($ipl->isIpv6('2001:4860:4860::8888'));echo '<br>';
+    print_r($ipl->ipv4ToDecimal('8.8.8.8'));echo '<br>';
+    print_r($ipl->decimalToIpv4(134744072));echo '<br>';
+    print_r($ipl->ipv6ToDecimal('2001:4860:4860::8888'));echo '<br>';
+    print_r($ipl->decimalToIpv6('42541956123769884636017138956568135816'));echo '<br>';
+    print_r($ipl->ipv4ToCidr('8.0.0.0', '8.255.255.255'));echo '<br>';
+    print_r($ipl->cidrToIpv4('8.0.0.0/8'));echo '<br>';
+    print_r($ipl->ipv6ToCidr('2002:0000:0000:1234:abcd:ffff:c0a8:0000', '2002:0000:0000:1234:ffff:ffff:ffff:ffff'));echo '<br>';
+    print_r($ipl->cidrToIpv6('2002::1234:abcd:ffff:c0a8:101/64'));echo '<br>';
+    print_r($ipl->compressIpv6('2002:0000:0000:1234:FFFF:FFFF:FFFF:FFFF'));echo '<br>';
+    print_r($ipl->expandIpv6('2002::1234:FFFF:FFFF:FFFF:FFFF'));echo '<br>';
+```
 
 ## Dependencies
 This module requires IP2Location BIN data file or IP2Location API key to function. You may download the BIN data file at
