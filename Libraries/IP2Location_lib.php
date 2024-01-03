@@ -142,6 +142,7 @@ class IP2Location_lib {
 				'key'     => IP2LOCATION_IO_API_KEY,
 				'ip'      => self::getIP($ip),
 				'lang'    => ((defined('IP2LOCATION_IO_LANGUAGE')) ? IP2LOCATION_IO_LANGUAGE : ''),
+				'source'  => 'codeigniter-ipl',
 			];
 			// Remove parameters without values
 			$params = array_filter($params);
