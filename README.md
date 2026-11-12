@@ -18,6 +18,12 @@ This module enables users to retrieve below geolocation information from an IP a
 * Usage Type
 * Address Type
 * Category
+* District
+* ASN
+* AS
+* AS Domain
+* AS Usage Type
+* AS CIDR
 
 This library will only work with CodeIgniter 4. For CodeIgniter 3, you can get it from [here](https://github.com/ip2location/codeigniter-ip2location).
 
@@ -67,6 +73,12 @@ Below are the methods supported for BIN data file lookup.
     $usageType = $ipl->getUsageType($ip);
     $addressType = $ipl->getAddressType($ip);
     $category = $ipl->getCategory($ip);
+    $district = $ipl->getDistrict($ip);
+    $asn = $ipl->getAsn($ip);
+    $as = $ipl->getAs($ip);
+    $asDomain = $ipl->getAsDomain($ip);
+    $asUSageType = $ipl->getAsUsageType($ip);
+    $asCidr = $ipl->getAsCidr($ip);
 ```
 
 ### Web Service

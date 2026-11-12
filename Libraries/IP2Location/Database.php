@@ -12,7 +12,7 @@ class Database
 	 *
 	 * @var string
 	 */
-	public const VERSION = '9.4.0';
+	public const VERSION = '9.8.1';
 
 	/**
 	 * Unsupported field message.
@@ -202,6 +202,48 @@ class Database
 	 * @var int
 	 */
 	public const CATEGORY = 22;
+
+	/**
+	 * District.
+	 *
+	 * @var int
+	 */
+	public const DISTRICT = 23;
+
+	/**
+	 * ASN.
+	 *
+	 * @var int
+	 */
+	public const ASN = 24;
+
+	/**
+	 * AS.
+	 *
+	 * @var int
+	 */
+	public const AS = 25;
+
+	/**
+	 * AS domain.
+	 *
+	 * @var int
+	 */
+	public const AS_DOMAIN = 26;
+
+	/**
+	 * AS usage type.
+	 *
+	 * @var int
+	 */
+	public const AS_USAGE_TYPE = 27;
+
+	/**
+	 * AS CIDR.
+	 *
+	 * @var int
+	 */
+	public const AS_CIDR = 28;
 
 	/**
 	 * Country name and code.
@@ -394,28 +436,34 @@ class Database
 	 * @var array
 	 */
 	private $columns = [
-		self::COUNTRY_CODE         => [8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8],
-		self::COUNTRY_NAME         => [8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8],
-		self::REGION_NAME          => [0,  0, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12],
-		self::CITY_NAME            => [0,  0, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16],
-		self::LATITUDE             => [0,  0,  0,  0, 20, 20,  0, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20],
-		self::LONGITUDE            => [0,  0,  0,  0, 24, 24,  0, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24],
-		self::ZIP_CODE             => [0,  0,  0,  0,  0,  0,  0,  0, 28, 28, 28, 28,  0, 28, 28, 28,  0, 28,  0, 28, 28, 28,  0, 28, 28],
-		self::TIME_ZONE            => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 32, 32, 28, 32, 32, 32, 28, 32,  0, 32, 32, 32,  0, 32, 32],
-		self::ISP                  => [0, 12,  0, 20,  0, 28, 20, 28,  0, 32,  0, 36,  0, 36,  0, 36,  0, 36, 28, 36,  0, 36, 28, 36, 36],
-		self::DOMAIN_NAME          => [0,  0,  0,  0,  0,  0, 24, 32,  0, 36,  0, 40,  0, 40,  0, 40,  0, 40, 32, 40,  0, 40, 32, 40, 40],
-		self::NET_SPEED            => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 32, 44,  0, 44, 32, 44,  0, 44,  0, 44,  0, 44, 44],
-		self::IDD_CODE             => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 36, 48,  0, 48,  0, 48, 36, 48,  0, 48, 48],
-		self::AREA_CODE            => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 40, 52,  0, 52,  0, 52, 40, 52,  0, 52, 52],
-		self::WEATHER_STATION_CODE => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 36, 56,  0, 56,  0, 56,  0, 56, 56],
-		self::WEATHER_STATION_NAME => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 40, 60,  0, 60,  0, 60,  0, 60, 60],
-		self::MCC                  => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 36, 64,  0, 64, 36, 64, 64],
-		self::MNC                  => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 40, 68,  0, 68, 40, 68, 68],
-		self::MOBILE_CARRIER_NAME  => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 44, 72,  0, 72, 44, 72, 72],
-		self::ELEVATION            => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 44, 76,  0, 76, 76],
-		self::USAGE_TYPE           => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 48, 80, 80],
-		self::ADDRESS_TYPE         => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 84],
-		self::CATEGORY             => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 88],
+		self::COUNTRY_CODE         => [8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,   8],
+		self::COUNTRY_NAME         => [8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,   8],
+		self::REGION_NAME          => [0,  0, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,  12],
+		self::CITY_NAME            => [0,  0, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16,  16],
+		self::LATITUDE             => [0,  0,  0,  0, 20, 20,  0, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,  20],
+		self::LONGITUDE            => [0,  0,  0,  0, 24, 24,  0, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24,  24],
+		self::ZIP_CODE             => [0,  0,  0,  0,  0,  0,  0,  0, 28, 28, 28, 28,  0, 28, 28, 28,  0, 28,  0, 28, 28, 28,  0, 28, 28,  28],
+		self::TIME_ZONE            => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 32, 32, 28, 32, 32, 32, 28, 32,  0, 32, 32, 32,  0, 32, 32,  32],
+		self::ISP                  => [0, 12,  0, 20,  0, 28, 20, 28,  0, 32,  0, 36,  0, 36,  0, 36,  0, 36, 28, 36,  0, 36, 28, 36, 36,  36],
+		self::DOMAIN_NAME          => [0,  0,  0,  0,  0,  0, 24, 32,  0, 36,  0, 40,  0, 40,  0, 40,  0, 40, 32, 40,  0, 40, 32, 40, 40,  40],
+		self::NET_SPEED            => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 32, 44,  0, 44, 32, 44,  0, 44,  0, 44,  0, 44, 44,  44],
+		self::IDD_CODE             => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 36, 48,  0, 48,  0, 48, 36, 48,  0, 48, 48,  48],
+		self::AREA_CODE            => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 40, 52,  0, 52,  0, 52, 40, 52,  0, 52, 52,  52],
+		self::WEATHER_STATION_CODE => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 36, 56,  0, 56,  0, 56,  0, 56, 56,  56],
+		self::WEATHER_STATION_NAME => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 40, 60,  0, 60,  0, 60,  0, 60, 60,  60],
+		self::MCC                  => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 36, 64,  0, 64, 36, 64, 64,  64],
+		self::MNC                  => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 40, 68,  0, 68, 40, 68, 68,  68],
+		self::MOBILE_CARRIER_NAME  => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 44, 72,  0, 72, 44, 72, 72,  72],
+		self::ELEVATION            => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 44, 76,  0, 76, 76,  76],
+		self::USAGE_TYPE           => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 48, 80, 80,  80],
+		self::ADDRESS_TYPE         => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 84,  84],
+		self::CATEGORY             => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 88,  88],
+		self::DISTRICT             => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  92],
+		self::ASN                  => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  96],
+		self::AS                   => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 100],
+		self::AS_DOMAIN            => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 104],
+		self::AS_USAGE_TYPE        => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 108],
+		self::AS_CIDR              => [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 112],
 	];
 
 	/**
@@ -446,6 +494,12 @@ class Database
 		self::USAGE_TYPE           => 'usageType',
 		self::ADDRESS_TYPE         => 'addressType',
 		self::CATEGORY             => 'category',
+		self::DISTRICT             => 'district',
+		self::ASN                  => 'asn',
+		self::AS                   => 'as',
+		self::AS_DOMAIN            => 'asDomain',
+		self::AS_USAGE_TYPE        => 'asUsageType',
+		self::AS_CIDR              => 'asCidr',
 		self::IP_ADDRESS           => 'ipAddress',
 		self::IP_VERSION           => 'ipVersion',
 		self::IP_NUMBER            => 'ipNumber',
@@ -458,6 +512,7 @@ class Database
 	 */
 	private $databases = [
 		// IPv4 databases
+		'IP-COUNTRY-REGION-CITY-LATITUDE-LONGITUDE-ZIPCODE-TIMEZONE-ISP-DOMAIN-NETSPEED-AREACODE-WEATHER-MOBILE-ELEVATION-USAGETYPE-ADDRESSTYPE-CATEGORY-DISTRICT-ASN',
 		'IP-COUNTRY-REGION-CITY-LATITUDE-LONGITUDE-ZIPCODE-TIMEZONE-ISP-DOMAIN-NETSPEED-AREACODE-WEATHER-MOBILE-ELEVATION-USAGETYPE-ADDRESSTYPE-CATEGORY',
 		'IP-COUNTRY-REGION-CITY-LATITUDE-LONGITUDE-ZIPCODE-TIMEZONE-ISP-DOMAIN-NETSPEED-AREACODE-WEATHER-MOBILE-ELEVATION-USAGETYPE',
 		'IP-COUNTRY-REGION-CITY-LATITUDE-LONGITUDE-ISP-DOMAIN-MOBILE-USAGETYPE',
@@ -485,6 +540,7 @@ class Database
 		'IP-COUNTRY',
 
 		// IPv6 databases
+		'IPV6-COUNTRY-REGION-CITY-LATITUDE-LONGITUDE-ZIPCODE-TIMEZONE-ISP-DOMAIN-NETSPEED-AREACODE-WEATHER-MOBILE-ELEVATION-USAGETYPE-ADDRESSTYPE-CATEGORY-DISTRICT-ASN',
 		'IPV6-COUNTRY-REGION-CITY-LATITUDE-LONGITUDE-ZIPCODE-TIMEZONE-ISP-DOMAIN-NETSPEED-AREACODE-WEATHER-MOBILE-ELEVATION-USAGETYPE-ADDRESSTYPE-CATEGORY',
 		'IPV6-COUNTRY-REGION-CITY-LATITUDE-LONGITUDE-ZIPCODE-TIMEZONE-ISP-DOMAIN-NETSPEED-AREACODE-WEATHER-MOBILE-ELEVATION-USAGETYPE',
 		'IPV6-COUNTRY-REGION-CITY-LATITUDE-LONGITUDE-ISP-DOMAIN-MOBILE-USAGETYPE',
@@ -968,6 +1024,10 @@ class Database
 		// Get IP version and number
 		list($ipVersion, $ipNumber) = $this->ipVersionAndNumber($ip);
 
+		if (!$ipVersion) {
+			return false;
+		}
+
 		// Perform a binary search
 		$pointer = $this->binSearch($ipVersion, $ipNumber);
 
@@ -1003,6 +1063,12 @@ class Database
 			$ifields[] = self::USAGE_TYPE;
 			$ifields[] = self::ADDRESS_TYPE;
 			$ifields[] = self::CATEGORY;
+			$ifields[] = self::DISTRICT;
+			$ifields[] = self::ASN;
+			$ifields[] = self::AS;
+			$ifields[] = self::AS_DOMAIN;
+			$ifields[] = self::AS_USAGE_TYPE;
+			$ifields[] = self::AS_CIDR;
 
 			$ifields[] = self::COUNTRY;
 			$ifields[] = self::COORDINATES;
@@ -1046,6 +1112,12 @@ class Database
 			self::USAGE_TYPE                  => false,
 			self::ADDRESS_TYPE                => false,
 			self::CATEGORY                    => false,
+			self::DISTRICT                    => false,
+			self::ASN                         => false,
+			self::AS                          => false,
+			self::AS_DOMAIN                   => false,
+			self::AS_USAGE_TYPE               => false,
+			self::AS_CIDR                     => false,
 			self::COUNTRY                     => false,
 			self::COORDINATES                 => false,
 			self::IDD_AREA                    => false,
@@ -1264,6 +1336,48 @@ class Database
 					}
 					break;
 
+				case self::DISTRICT:
+					if (!$done[self::DISTRICT]) {
+						$results[self::DISTRICT] = $this->readDistrict($pointer);
+						$done[self::DISTRICT] = true;
+					}
+					break;
+
+				case self::ASN:
+					if (!$done[self::ASN]) {
+						$results[self::ASN] = $this->readAsn($pointer);
+						$done[self::ASN] = true;
+					}
+					break;
+
+				case self::AS:
+					if (!$done[self::AS]) {
+						$results[self::AS] = $this->readAs($pointer);
+						$done[self::AS] = true;
+					}
+					break;
+
+				case self::AS_DOMAIN:
+					if (!$done[self::AS_DOMAIN]) {
+						$results[self::AS_DOMAIN] = $this->readAsDomain($pointer);
+						$done[self::AS_DOMAIN] = true;
+					}
+					break;
+
+				case self::AS_USAGE_TYPE:
+					if (!$done[self::AS_USAGE_TYPE]) {
+						$results[self::AS_USAGE_TYPE] = $this->readAsUsageType($pointer);
+						$done[self::AS_USAGE_TYPE] = true;
+					}
+					break;
+
+				case self::AS_CIDR:
+					if (!$done[self::AS_CIDR]) {
+						$results[self::AS_CIDR] = $this->readAsCidr($pointer);
+						$done[self::AS_CIDR] = true;
+					}
+					break;
+
 				case self::IP_ADDRESS:
 					if (!$done[self::IP_ADDRESS]) {
 						$results[self::IP_ADDRESS] = $ip;
@@ -1402,9 +1516,9 @@ class Database
 				// Deal with shorthand bytes
 				switch (strtoupper(substr($memoryLimit, -1))) {
 					case 'G': $value *= 1024;
-					// no break
+						// no break
 					case 'M': $value *= 1024;
-					// no break
+						// no break
 					case 'K': $value *= 1024;
 				}
 			}
@@ -1497,36 +1611,38 @@ class Database
 	/**
 	 * Determine whether the given IP number of the given version lies between the given bounds.
 	 *
-	 * This function will return 0 if the given ip number falls within the given bounds
-	 * for the given version, -1 if it falls below, and 1 if it falls above.
-	 *
 	 * @param int        $version IP version to use (either 4 or 6)
-	 * @param int|string $ip      IP number to check (int for IPv4, string for IPv6)
-	 * @param int|string $low     Lower bound (int for IPv4, string for IPv6)
-	 * @param int|string $high    Uppoer bound (int for IPv4, string for IPv6)
+	 * @param int|string $ip      IP number to check
+	 * @param int|string $low     Lower bound
+	 * @param int|string $high    Upper bound
 	 *
 	 * @return int
 	 */
 	private function ipBetween($version, $ip, $low, $high)
 	{
 		if ($version === 4) {
-			// Use normal PHP ints
+			// Cast unpack results to unsigned integer strings for safe comparison
+			if ($low < 0) {
+				$low = sprintf('%u', $low);
+			}
+			if ($high < 0) {
+				$high = sprintf('%u', $high);
+			}
+
 			if ($low <= $ip) {
 				if ($ip < $high) {
 					return 0;
 				}
-
 				return 1;
 			}
-
 			return -1;
 		}
-		// Use BCMath
+
+		// IPv6
 		if (bccomp($low, $ip, 0) <= 0) {
 			if (bccomp($ip, $high, 0) <= -1) {
 				return 0;
 			}
-
 			return 1;
 		}
 
@@ -1589,8 +1705,8 @@ class Database
 	 */
 	private function bcBin2Dec($data)
 	{
-		if (!$data) {
-			return;
+		if (strlen($data) < 16) {
+			return '0';
 		}
 
 		$parts = [
@@ -1602,11 +1718,22 @@ class Database
 
 		foreach ($parts as &$part) {
 			if ($part[1] < 0) {
-				$part[1] += 4294967296;
+				$part[1] = bcadd((string)$part[1], '4294967296');
 			}
 		}
 
-		$result = bcadd(bcadd(bcmul($parts[0][1], bcpow(4294967296, 3)), bcmul($parts[1][1], bcpow(4294967296, 2))), bcadd(bcmul($parts[2][1], 4294967296), $parts[3][1]));
+		$base = '4294967296';
+
+		$result = bcadd(
+			bcadd(
+				bcmul((string)$parts[0][1], bcpow($base, '3')),
+				bcmul((string)$parts[1][1], bcpow($base, '2'))
+			),
+			bcadd(
+				bcmul((string)$parts[2][1], $base),
+				(string)$parts[3][1]
+			)
+		);
 
 		return $result;
 	}
@@ -1635,18 +1762,16 @@ class Database
 	 */
 	private function read($pos, $len)
 	{
-		switch ($this->mode) {
-			case self::SHARED_MEMORY:
-				return shmop_read($this->resource, $pos, $len);
-
-			case self::MEMORY_CACHE:
-				return $data = substr($this->buffer[$this->resource], $pos, $len);
-
-			default:
-				fseek($this->resource, $pos, SEEK_SET);
-
-				return fread($this->resource, $len);
+		if ($this->mode === self::MEMORY_CACHE) {
+			return (string) substr($this->buffer[$this->resource], $pos, $len);
 		}
+
+		if ($this->mode === self::SHARED_MEMORY) {
+			return shmop_read($this->resource, $pos, $len);
+		}
+
+		fseek($this->resource, $pos, SEEK_SET);
+		return fread($this->resource, $len);
 	}
 
 	/**
@@ -2038,6 +2163,126 @@ class Database
 	}
 
 	/**
+	 * High level function to fetch the district.
+	 *
+	 * @param int $pointer Position to read from, if false, return self::INVALID_IP_ADDRESS
+	 *
+	 * @return string
+	 */
+	private function readDistrict($pointer)
+	{
+		if ($pointer === false) {
+			return self::INVALID_IP_ADDRESS;
+		}
+
+		if ($this->columns[self::DISTRICT][$this->type] === 0) {
+			return self::FIELD_NOT_SUPPORTED;
+		}
+
+		return $this->readString($this->columns[self::DISTRICT][$this->type]);
+	}
+
+	/**
+	 * High level function to fetch the ASN.
+	 *
+	 * @param int $pointer Position to read from, if false, return self::INVALID_IP_ADDRESS
+	 *
+	 * @return string
+	 */
+	private function readAsn($pointer)
+	{
+		if ($pointer === false) {
+			return self::INVALID_IP_ADDRESS;
+		}
+
+		if ($this->columns[self::ASN][$this->type] === 0) {
+			return self::FIELD_NOT_SUPPORTED;
+		}
+
+		return $this->readString($this->columns[self::ASN][$this->type]);
+	}
+
+	/**
+	 * High level function to fetch the AS.
+	 *
+	 * @param int $pointer Position to read from, if false, return self::INVALID_IP_ADDRESS
+	 *
+	 * @return string
+	 */
+	private function readAs($pointer)
+	{
+		if ($pointer === false) {
+			return self::INVALID_IP_ADDRESS;
+		}
+
+		if ($this->columns[self::AS][$this->type] === 0) {
+			return self::FIELD_NOT_SUPPORTED;
+		}
+
+		return $this->readString($this->columns[self::AS][$this->type]);
+	}
+
+	/**
+	 * High level function to fetch the AS domain.
+	 *
+	 * @param int $pointer Position to read from, if false, return self::INVALID_IP_ADDRESS
+	 *
+	 * @return string
+	 */
+	private function readAsDomain($pointer)
+	{
+		if ($pointer === false) {
+			return self::INVALID_IP_ADDRESS;
+		}
+
+		if ($this->columns[self::AS_DOMAIN][$this->type] === 0) {
+			return self::FIELD_NOT_SUPPORTED;
+		}
+
+		return $this->readString($this->columns[self::AS_DOMAIN][$this->type]);
+	}
+
+	/**
+	 * High level function to fetch the AS usage type.
+	 *
+	 * @param int $pointer Position to read from, if false, return self::INVALID_IP_ADDRESS
+	 *
+	 * @return string
+	 */
+	private function readAsUsageType($pointer)
+	{
+		if ($pointer === false) {
+			return self::INVALID_IP_ADDRESS;
+		}
+
+		if ($this->columns[self::AS_USAGE_TYPE][$this->type] === 0) {
+			return self::FIELD_NOT_SUPPORTED;
+		}
+
+		return $this->readString($this->columns[self::AS_USAGE_TYPE][$this->type]);
+	}
+
+	/**
+	 * High level function to fetch the AS CIDR.
+	 *
+	 * @param int $pointer Position to read from, if false, return self::INVALID_IP_ADDRESS
+	 *
+	 * @return string
+	 */
+	private function readAsCidr($pointer)
+	{
+		if ($pointer === false) {
+			return self::INVALID_IP_ADDRESS;
+		}
+
+		if ($this->columns[self::AS_CIDR][$this->type] === 0) {
+			return self::FIELD_NOT_SUPPORTED;
+		}
+
+		return $this->readString($this->columns[self::AS_CIDR][$this->type]);
+	}
+
+	/**
 	 * Get the boundaries for an IP address.
 	 *
 	 * @param int $ipVersion IP address version
@@ -2048,15 +2293,38 @@ class Database
 	 */
 	private function getIpBoundary($ipVersion, $position, $width)
 	{
-		// Read 128 bits from the position
-		$section = $this->read($position, 128);
+		$readLength = $width + ($ipVersion === 4 ? 4 : 16);
+
+		// Read the exact chunk needed
+		$section = $this->read($position, $readLength);
 
 		switch ($ipVersion) {
 			case 4:
-				return [unpack('V', substr($section, 0, 4))[1], unpack('V', substr($section, $width, 4))[1]];
+				// Check if substring extraction works
+				$first = substr($section, 0, 4);
+				$second = substr($section, $width, 4);
+
+				if ($first === false || $second === false) {
+					return [false, false];
+				}
+
+				return [
+					unpack('V', $first)[1],
+					unpack('V', $second)[1]
+				];
 
 			case 6:
-				return [$this->bcBin2Dec(substr($section, 0, 16)), $this->bcBin2Dec(substr($section, $width, 16))];
+				$first = substr($section, 0, 16);
+				$second = substr($section, $width, 16);
+
+				if ($first === false || $second === false || strlen($second) < 16) {
+					return [false, false];
+				}
+
+				return [
+					$this->bcBin2Dec($first),
+					$this->bcBin2Dec($second)
+				];
 		}
 
 		return [false, false];

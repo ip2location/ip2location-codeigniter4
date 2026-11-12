@@ -134,6 +134,30 @@ class IP2Location_lib {
 		return self::$ip2location->lookup(self::getIP($ip), \IP2Location\Database::CATEGORY);
 	}
 
+	public function getDistrict($ip=NULL) {
+		return self::$ip2location->lookup(self::getIP($ip), \IP2Location\Database::DISTRICT);
+	}
+
+	public function getAsn($ip=NULL) {
+		return self::$ip2location->lookup(self::getIP($ip), \IP2Location\Database::ASN);
+	}
+
+	public function getAs($ip=NULL) {
+		return self::$ip2location->lookup(self::getIP($ip), \IP2Location\Database::AS);
+	}
+
+	public function getAsDomain($ip=NULL) {
+		return self::$ip2location->lookup(self::getIP($ip), \IP2Location\Database::AS_DOMAIN);
+	}
+
+	public function getAsUsageType($ip=NULL) {
+		return self::$ip2location->lookup(self::getIP($ip), \IP2Location\Database::AS_USAGE_TYPE);
+	}
+
+	public function getAsCidr($ip=NULL) {
+		return self::$ip2location->lookup(self::getIP($ip), \IP2Location\Database::AS_CIDR);
+	}
+
 	public function getWebService($ip=NULL) {
 		if (USE_IO) {
 			// Using IP2Location.io API
